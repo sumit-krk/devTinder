@@ -4,6 +4,14 @@ const app = express();
 
 //route order important in node.js and also exact match of route
 
+app.use("/medleware", (req, res, next)=>{
+    console.log("1st Response")
+    next()
+}, (req, res, next)=>{
+    console.log("2nd response")
+    res.send("sending 2nd response")
+})
+
 app.get("/user", (req,res)=>{
     console.log(req.query)
     res.send({firstName: "sumit", lastName:"Kumar"})
