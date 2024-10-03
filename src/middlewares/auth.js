@@ -1,5 +1,5 @@
 const userAuth=(req, res, next)=>{
-    if(false){
+    if(true){
         next();
     }
     else{

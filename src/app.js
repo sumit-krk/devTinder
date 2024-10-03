@@ -8,7 +8,12 @@ const {userAuth} = require("./middlewares/auth")
 app.use("/admin", userAuth)
 
 app.post("/admin/login", (req, res)=>{
-    res.status(201).send("Login success")
+    try{
+        throw new Error("User Data not found")
+        res.status(201).send("Login success")
+    }catch(err){
+        res.status(500).send("Something went wrong plz connect support teams")
+    }
 })
 
 app.delete("/admin/delete", (req, res)=>{
@@ -42,6 +47,12 @@ app.delete("/user", (req,res)=>{
 
 app.put("/user", (req,res)=>{
     res.send("user Data Updated Successfully")
+})
+
+app.use("/", (err, req, res, next)=>{
+    if(err){
+        res.status(500).send("something went wrong!!")
+    }
 })
 
 app.listen(7000, ()=>{
