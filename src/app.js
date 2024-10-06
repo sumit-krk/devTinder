@@ -1,5 +1,5 @@
 const express = require("express");
-require("./config/database")
+const {connectDB} = require("./config/database")
 
 const app = express();
 const {userAuth} = require("./middlewares/auth")
@@ -56,7 +56,12 @@ app.use("/", (err, req, res, next)=>{
     }
 })
 
-app.listen(7000, ()=>{
-    console.log("server listning on port 3000")
+connectDB().then(()=>{
+    console.log("DataBase Connected..")
+    app.listen(7000, ()=>{
+        console.log("server listning on port 3000")
+    })
+}).catch((err)=>{
+    console.log("Not able to connect, plz check")
 })
 
