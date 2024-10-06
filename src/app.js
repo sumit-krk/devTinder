@@ -5,14 +5,18 @@ const User = require("./models/user")
 
 app.post("/signup", async(req, res)=>{
     const userObj = new User({
-        firstName:'sumit',
+        firstName:'sujeet',
         lastName:'kumar',
-        emailId: "sumit@gmail.com",
-        password: "Sumit@123"
+        emailId: "sujeet@gmail.com",
+        password: "Sujeet@123"
     })
 
-    await userObj.save();
-    res.send('User Added successfully')
+    try{
+        await userObj.save();
+        res.send('User Added successfully')
+    } catch(err){
+        res.status(400).send("Error while saving the user" + err.message)
+    }
 })
 
 
